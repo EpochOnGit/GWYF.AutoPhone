@@ -1,7 +1,5 @@
 ﻿using BepInEx;
 using BepInEx.Logging;
-using GWYF.AutoPhone.Code;
-using HarmonyLib;
 using Mirror;
 using System.Collections;
 using System.Reflection;
