@@ -1,0 +1,67 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <Import Project="GameDir.props" Condition="Exists('GameDir.props')" />
+  
+  <PropertyGroup>
+    <TargetFramework>netstandard2.1</TargetFramework>
+    <AssemblyName>GWYF.AutoPhone</AssemblyName>
+    <Version>1.0.0</Version>
+    <RootNamespace>GWYF.AutoPhone</RootNamespace>
+    <OutputPath>$(MSBuildProjectDirectory)\build</OutputPath>
+    <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+    <AppendRuntimeIdentifierToOutputPath>false</AppendRuntimeIdentifierToOutputPath>
+    <ManagedDir Condition="'$(ManagedDir)' == ''">$(GameDir)\Gamble With Your Friends_Data\Managed</ManagedDir>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Reference Include="BepInEx">
+      <HintPath>$(BepInExDir)\BepInEx.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="0Harmony">
+      <HintPath>$(BepInExDir)\0Harmony.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="Assembly-CSharp">
+      <HintPath>$(ManagedDir)\Assembly-CSharp.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="UnityEngine">
+      <HintPath>$(ManagedDir)\UnityEngine.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="UnityEngine.CoreModule">
+      <HintPath>$(ManagedDir)\UnityEngine.CoreModule.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="Mirror">
+      <HintPath>$(ManagedDir)\Mirror.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="README.md">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="thunderstore\CHANGELOG.md">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="thunderstore\icon.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
+  <Target Name="Thunderstore" AfterTargets="Build">
+    <PropertyGroup>
+      <ThunderstoreDir>$(OutputPath)thunderstore</ThunderstoreDir>
+      <ThunderstoreZIP>$(OutputPath)$(AssemblyName)-$(Version)-thunderstore.zip</ThunderstoreZIP>
+      <ManifestFile>$(ThunderstoreDir)\manifest.json</ManifestFile>
+    </PropertyGroup>
+    
+    <WriteLinesToFile File="$(ManifestFile)" Lines="{&#xD;&#xA;        &quot;name&quot;:&quot;AutoPhone&quot;,&#xD;&#xA;        &quot;version_number&quot;: &quot;$(Version)&quot;,&#xD;&#xA;        &quot;website_url&quot;: &quot;https://github.com/EpochOnGit/GWYF.AutoPhone&quot;,&#xD;&#xA;        &quot;description&quot;: &quot;The shark picks up the phone so you don't have to!&quot;,&#xD;&#xA;        &quot;dependencies&quot;: [&quot;BepInEx-BepInExPack-5.4.2305&quot;]&#xD;&#xA;      }" Overwrite="true" Encoding="UTF-8" />
+    <Copy SourceFiles="$(OutputPath)$(AssemblyName).dll" DestinationFolder="$(ThunderstoreDir)" />
+    <Copy SourceFiles="$(OutputPath)README.md" DestinationFolder="$(ThunderstoreDir)" />
+    <ZipDirectory SourceDirectory="$(ThunderstoreDir)" DestinationFile="$(ThunderstoreZIP)" Overwrite="true" />
+  </Target>
+</Project>

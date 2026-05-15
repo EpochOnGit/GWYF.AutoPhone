@@ -1,0 +1,6 @@
+<Project>
+  <PropertyGroup>
+    <GameDir>PathToGameDir\Gamble With Your Friends</GameDir>
+    <BepInExDir>PathToGameDir\BepInEx\core</BepInExDir>
+  </PropertyGroup>
+</Project>
