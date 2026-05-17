@@ -5,7 +5,7 @@
   <PropertyGroup>
     <TargetFramework>netstandard2.1</TargetFramework>
     <AssemblyName>GWYF.AutoPhone</AssemblyName>
-    <Version>1.0.0</Version>
+    <Version>1.0.1</Version>
     <RootNamespace>GWYF.AutoPhone</RootNamespace>
     <OutputPath>$(MSBuildProjectDirectory)\build</OutputPath>
     <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>

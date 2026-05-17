@@ -126,6 +126,6 @@ namespace GWYF.AutoPhone
     {
         public const string PLUGIN_GUID = "GWYF.Epoch.AutoPhone";
         public const string PLUGIN_NAME = "Auto Phone!";
-        public const string PLUGIN_VERSION = "1.0.0";
+        public const string PLUGIN_VERSION = "1.0.1";
     }
 }
